@@ -1,0 +1,22 @@
+{
+  "name": "yakshayush-app",
+  "version": "1.0.0",
+  "description": "sumeet",
+  "main": "app.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "no"
+  },
+  "keywords": [
+    "node"
+  ],
+  "author": "sumeet",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.5",
+    "express": "^4.17.1"
+  }
+}
