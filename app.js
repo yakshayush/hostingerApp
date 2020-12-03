@@ -1,11 +1,13 @@
+const mongoose = require('mongoose');
+const config = require('config');
 const express = require("express");
 const nodemon = require("nodemon");
-const config = require('./config/config');
 const ejs = require("ejs");
 //new dependencies for db//
 const bodyparser = require("body-parser");
 // dependecies ends here//
-const PORT = 3000;
+const PORT = config.get("port");
+console.log(PORT);
 const app = express();
 //db connections //
 app.use(bodyparser.json());
@@ -13,7 +15,19 @@ app.use(bodyparser.urlencoded({
     extended:true
 }));
 
-app.use(config.cors);
+require("./model/user");
+const dbConfig = config.get('mongoDb.host');
+mongoose.connect(dbConfig, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true });
+
+mongoose.connection.on("error", () => {
+    console.log("> error occurred from the database");
+}).once("open", () => {
+    console.log("> connected database");
+});
+console.log('NODE_ENV: ' + config.util.getEnv('NODE_ENV'));
+
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 app.set('views', './views');
