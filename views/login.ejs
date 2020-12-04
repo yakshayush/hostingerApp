@@ -1,0 +1,41 @@
+<%- include("./partial/header") %>
+
+   
+<div class="container mt-5">
+    
+    <div class="float-left">
+        <img src="doctor.png" height="60%" >
+    </div>
+
+    <div class="float-right">
+    <h1>Login</h1>
+    <form action="/actionLogin" method="POST">
+        <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+        </div>
+        <div class="checkbox">
+            <label><input type="checkbox"> Remember me</label>
+          </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+        
+         <a href="/" class="btn btn-primary">Go Back</a>
+
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#">New around here? Sign up</a>
+        <a class="dropdown-item" href="#">Forgot password?</a>
+        </div>
+  
+    </form>
+</div>
+</div>
+
+
+
+
+<%- include("./partial/footer") %>
