@@ -4,7 +4,9 @@
   "description": "sumeet",
   "main": "app.js",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "dev" :"nodemon views/app.js",
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
