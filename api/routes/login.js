@@ -1,23 +1,10 @@
 const express = require("express");
 const router = express.Router();
-
-router.post("/actionLogin", (req, res, next) => {
+const loginController = require("../controller/loginController");
+router.post("/actionLogin", async(req, res, next) => {
 
     console.log('kkk');
-    var email  = req.body.email;
-    var password = req.body.password;
-      
-    var data = {
-            "email" : email,
-            "password" : password
-            } 
-            db.collection('login').insertOne(data,(err,collection)=>{
-            if(err){
-                throw err;
-            }
-            console.log('Record inserted sucessfully in db');
-
-        })
+    loginController.create_a_task(req, res);
      
   //  res.render("../../views/login");
     next();
