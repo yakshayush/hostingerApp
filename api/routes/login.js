@@ -1,29 +1,27 @@
 const express = require("express");
 const router = express.Router();
+const loginController = require("../controller/loginController");
+router.post("/signInForm", async(req, res, next) => {
 
-router.post("/actionLogin", (req, res, next) => {
-    var email  = req.body.email;
-    var password = req.body.password;
-      
-    var data = {
-            "email" : email,
-            "password" : password
-            } 
-            db.collection('login').insertOne(data,(err,collection)=>{
-            if(err){
-                throw err;
-            }
-            console.log('Record inserted sucessfully in db');
-
-        })
+    console.log('kkk');
+    loginController.create_a_task(req, res);
      
-    res.render("jak");
+  //  res.render("../../views/login");
     next();
 });
 
 //login main page
 router.get("/", (req,res,next) =>{
     res.render("login");
+});
+
+
+router.post("/login", (req,res) =>{
+        res.render("jak");
+   });
+
+   router.post("/signUpForm", (req,res) =>{
+    res.render("jak");
 });
 
 module.exports = router;
