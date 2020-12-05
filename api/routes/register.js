@@ -4,11 +4,11 @@ const config = require('../../config/config');
 const mongoose = require('mongoose');
 config.initializeDB;
 const db = mongoose.connection;
-db.on('error',()=>console.log('error in connection'));
 db.once('open',()=>console.log('connected sucessfully sir'));
+db.on('error',()=>console.log('error in connection'));
 
 router.post("/actionregister", async(req, res, next)=> {
-    
+    // move the service/backend action to controller
     var name = req.body.name;
     var lastname = req.body.lastname;
     var profile = req.body.profile;
@@ -25,7 +25,7 @@ router.post("/actionregister", async(req, res, next)=> {
           "confirmpassword" : confirmpassword
             }
 
-    db.collection('reg').insertOne(data,(err,collection)=>{
+    db.collection("reg").insertOne(data,(err,collection)=>{
         if(err){
                 throw err;
             }

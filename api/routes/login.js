@@ -2,8 +2,6 @@ const express = require("express");
 const router = express.Router();
 
 router.post("/actionLogin", (req, res, next) => {
-
-    console.log('kkk');
     var email  = req.body.email;
     var password = req.body.password;
       
@@ -19,7 +17,7 @@ router.post("/actionLogin", (req, res, next) => {
 
         })
      
-  //  res.render("../../views/login");
+    res.render("jak");
     next();
 });
 
@@ -27,10 +25,5 @@ router.post("/actionLogin", (req, res, next) => {
 router.get("/", (req,res,next) =>{
     res.render("login");
 });
-
-
-router.post("/login", (req,res) =>{
-        res.render("jak");
-   });
 
 module.exports = router;
