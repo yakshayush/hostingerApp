@@ -1,11 +1,11 @@
+'use strict';
+
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const userSchema = new Schema({
+const loginSchema = new Schema({
     username: String,
     googleId: String
 });
 
-const newuser = mongoose.model('newuser', userSchema);
-
-module.exports = newuser;
+module.exports = mongoose.model('login', loginSchema);

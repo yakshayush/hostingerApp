@@ -26,7 +26,8 @@ const userSchema = new mongoose.Schema({
         required: true,
         unique: [true, "EMail already exist"],
         validate(value) {
-            if (validator.isEmail(value)) {
+            if (!validator.isEmail(value)) {
+                console.log(value);
                 throw new console.error("invalid email");
             }
         }
@@ -34,15 +35,24 @@ const userSchema = new mongoose.Schema({
 
     password: {
         type: String,
-        required: true,
-        minlength: 3
+      //  required: true,
+      //  minlength: 3
     },
 
     confirmpassword: {
         type: String,
-        required: true,
-        minlength: 3
+       // required: true,
+       // minlength: 3
+    },
+
+    created: {
+        type: Date
+    }, 
+
+    authType: {
+        type: String
     }
+
 });
 
 //create new collections //
