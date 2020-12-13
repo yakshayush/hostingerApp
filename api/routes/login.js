@@ -2,11 +2,10 @@ const express = require("express");
 const router = express.Router();
 const loginController = require("../controller/loginController");
 const passport = require('passport');
-router.post("/signInForm", async(req, res, next) => {
 
+router.post("/signInForm", async(req, res, next) => {
     console.log('kkk');
     loginController.create_a_task(req, res);
-
     //  res.render("../../views/login");
     next();
 });
@@ -17,13 +16,19 @@ router.get("/", (req, res, next) => {
 });
 
 router.get("/auth/google", passport.authenticate('google', {
-    scope: ['profile']
+    scope: ['profile', 'email']
 }));
 
-router.get("/google/callback", (req, res, next) => {
+router.get("/google/callback",passport.authenticate('google'), (req, res) => {
+    //console.log('error:', error);
+    //console.log('response', response);
+    //console.log('body', body);
+    //console.log(response.statusCode);
+    // return done(null, body);
+    console.log('request --- ', req.user);
+    console.log('request --- ', res.user);
 
-    console.log('success', req);
-    res.render('login');
+    res.render('success', {user: req.user});
 });
 
 router.post("/login", (req, res) => {
