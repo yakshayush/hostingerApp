@@ -41,31 +41,31 @@
                         </a>
                     </div>
                 </form>
-                <form action="/register/actionregister" enctype="application/json" class="sign-up-form" method="POST">
+                <form action="/register/actionregister" class="sign-up-form" method="POST">
                     <h2 class="title">Sign up</h2>
                     <div class="input-field">
                         <i class="fas fa-user"></i>
-                        <input type="text" class="form-control" id="Username" placeholder="User Name" />
+                        <input type="text" class="form-control" id="Username" name="name" placeholder="User Name" />
                     </div>
                     <div class="input-field">
                         <i class="fas fa-user"></i>
-                        <input type="text" class="form-control" id="lastname"  placeholder="Last name" />
+                        <input type="text" class="form-control" id="lastname" name="lastname"  placeholder="Last name" />
                     </div>
                     <div class="input-field">
                         <i class="fas fa-envelope"></i>
-                        <input type="email" class="form-control" id="email" placeholder="Email" />
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Email" />
                     </div>
                     <div class="input-field">
                         <i class="fas fa-lock"></i>
-                        <input type="password" class="form-control" id="password" placeholder="Password" />
+                        <input type="password" name="password" class="form-control" id="password" placeholder="Password" />
                     </div>
                     <div class="input-field">
                         <i class="fas fa-lock"></i>
-                        <input type="password" class="form-control" id="confirmpassword" placeholder="Confirm Password" />
+                        <input type="password" name="confirmPassword" class="form-control" id="confirmpassword" placeholder="Confirm Password" />
                     </div>
                     <div class="input-field">
                         <i class="fas fa-user"></i>
-                        <input type="profile" placeholder="Profile" />
+                        <input type="profile" name="profile" id="profile" placeholder="Profile" />
                     </div>
                     <input type="submit" class="btn" value="Sign up" />
                     <p class="social-text">Or Sign up with social platforms</p>
