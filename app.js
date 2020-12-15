@@ -10,7 +10,7 @@ const PORT = config.get("port");
 console.log(PORT);
 const app = express();
 //db connections //
-app.use(express.json());
+app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({
     extended: true
 }));
@@ -47,7 +47,7 @@ app.set("view engine", "ejs", "html");
 app.set('views', './views');
 app.engine('html', require('ejs').renderFile);
 app.use(cors());
-app.use(errorHandler);
+//app.use(errorHandler());
 
 const loginRoute = require('./api/routes/login');
 const registerRoute = require('./api/routes/register');
