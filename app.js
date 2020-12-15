@@ -35,14 +35,14 @@ app.use(express.static("public"));
 app.set("view engine", "ejs");
 app.set('views', './views');
 app.engine('html', require('ejs').renderFile);
-app.use(helmet);
-app.use(rateLimiter);
+//app.use(helmet());
+//app.use(rateLimiter);
 
 const loginRoute = require('./api/routes/login');
 const registerRoute = require('./api/routes/register');
 
 app.get("/", (req, res) => {
-    res.render("app");
+    res.render("home");
 });
 app.use('/login', loginRoute);
 app.use('/register', registerRoute);

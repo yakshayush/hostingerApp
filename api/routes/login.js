@@ -5,19 +5,19 @@ router.post("/actionLogin", async(req, res, next) => {
 
     console.log('kkk');
     loginController.create_a_task(req, res);
-     
-  //  res.render("../../views/login");
+
+    //  res.render("../../views/login");
     next();
 });
 
 //login main page
-router.get("/", (req,res,next) =>{
-    res.render("login");
+router.get("/", (req, res, next) => {
+    res.render("login_register");
 });
 
 
-router.post("/login", (req,res) =>{
-        res.render("jak");
-   });
+router.post("/login", (req, res) => {
+    res.render("jak");
+});
 
 module.exports = router;
