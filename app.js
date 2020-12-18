@@ -19,6 +19,8 @@ app.use(session({
     saveUninitialized: true,
     secret: 'node' 
 }));
+const helmet = require("helmet");
+const rateLimiter = require("express-rate-limit");
 
 const yaml = require('js-yaml');
 require('./utils/passport-setup');
@@ -46,6 +48,9 @@ app.use(express.static("public"));
 app.set("view engine", "ejs", "html");
 app.set('views', './views');
 app.engine('html', require('ejs').renderFile);
+
+//app.use(helmet());
+//app.use(rateLimiter);
 app.use(cors());
 //app.use(errorHandler());
 
@@ -61,7 +66,7 @@ app.use(function(req, res, next) {
 });
 
 app.get("/", (req, res) => {
-    res.render("homepage"); //res.render("app")
+    res.render("home");
 });
 
 //html

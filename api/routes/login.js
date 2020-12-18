@@ -12,12 +12,16 @@ router.post("/signInForm", async(req, res, next) => {
 
 //login main page
 router.get("/", (req, res, next) => {
-    res.render("login");
+    res.render("login_register");
 });
 
 router.get("/auth/google", passport.authenticate('google', {
     scope: ['profile', 'email']
 }));
+
+router.post("/login", (req, res) => {
+    res.render("jak");
+});
 
 router.get("/google/callback",passport.authenticate('google'), (req, res) => {
     //console.log('error:', error);
