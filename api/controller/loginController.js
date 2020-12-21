@@ -1,14 +1,17 @@
 'use strict';
 
-// modify to find and return 
 var mongoose = require('mongoose');
 var Task = mongoose.model('User');
 
-exports.create_a_task = function(req, res) {
+exports.create_a_task = function(req, res, next) {
     var new_task = new Task(req.body);
-    new_task.save(function(err, task) {
-        if (err)
-            console.log(err);
-        res.json(task);
+    console.log('new_+tak ---' ,new_task)
+    new_task.save()
+    .then(function(response){
+        res.json(response);
+        return;
+    })
+    .catch(function(reason){
+        next(reason);
     });
 };

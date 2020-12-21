@@ -30,7 +30,9 @@ require("./model/user");
 const dbConfig = config.get('mongoDb.host');
 mongoose.connect(dbConfig, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+    useCreateIndex: true
 });
 
 mongoose.connection.on("error", () => {
@@ -38,7 +40,8 @@ mongoose.connection.on("error", () => {
 }).once("open", () => {
     console.log("> connected database");
 });
-console.log('NODE_ENV: ' + config.util.getEnv('NODE_ENV'));
+var NODE_ENV = config.util.getEnv('NODE_ENV');
+console.log('NODE_ENV: ' + NODE_ENV);
 var cookieParser = require('cookie-parser');
 app.use(cookieParser('node'));
 app.use(session({ secret: 'node', cookie: { maxAge: 24 * 6000 } }));
@@ -47,7 +50,7 @@ app.set("view engine", "ejs", "html");
 app.set('views', './views');
 app.engine('html', require('ejs').renderFile);
 app.use(cors());
-//app.use(errorHandler());
+app.use(errorHandler);
 
 const loginRoute = require('./api/routes/login');
 const registerRoute = require('./api/routes/register');
@@ -68,6 +71,7 @@ app.get("/", (req, res) => {
 app.use('/login', loginRoute);
 app.use('/register', registerRoute);
 
-app.listen(PORT, () => console.log('server started'));
-
+if (NODE_ENV !== 'test') {
+    app.listen(PORT, () => console.log('server started'));
+}
 module.exports = app;

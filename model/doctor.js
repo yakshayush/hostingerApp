@@ -1,9 +1,9 @@
 'use strict';
+
 const mongoose = require("mongoose");
 const validator = require("validator");
-const bcrypt = require('bcrypt');
 
-const userSchema = new mongoose.Schema({
+const doctorSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -16,16 +16,16 @@ const userSchema = new mongoose.Schema({
         minlength: 3
     },
 
-    profile: {
+    specialization: {
         type: String,
         required: true,
-        minlength: 4
+        minlength: 5
     },
 
     email: {
         type: String,
         required: true,
-        unique: [true, "EMail already exist"],
+        unique: [true, "Email already exist"],
         validate(value) {
             if (!validator.isEmail(value)) {
                 console.log(value);
@@ -36,39 +36,37 @@ const userSchema = new mongoose.Schema({
 
     password: {
         type: String,
-        required: true,
-        minlength: 3
+      //  required: true,
+      //  minlength: 3
     },
 
     created: {
-        type: Date,
-        default: Date.now()
+        type: Date, default: Date.now
     }, 
 
     phone: {
-        type: Number
+        type: Integer
     }, 
 
-    DOB: {
-        type : String,
-//        required : true
+    authType: {
+        type: String
     },
 
-    authType: {
+    address:{
+        type: String
+    }, 
+
+    onlineConsultation: {
+        type: Boolean
+    },
+
+    consultationCharge: {
+        type: Integer
+    },
+
+    clinicName: {
         type: String
     }
 });
 
-userSchema.pre('save', async function(next) {
-    try {
-        console.log('pass' , this.password)
-        const salt = await bcrypt.hash(this.password, 10)
-        this.password = salt
-        next();
-    } catch (error) {
-        next(error)   
-    }
-})
-
-//create new collections //
-module.exports = mongoose.model("User", userSchema);
+exports.module = mongoose.model("Doctor", doctorSchema);

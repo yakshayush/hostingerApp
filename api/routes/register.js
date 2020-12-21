@@ -1,19 +1,15 @@
 const express = require("express");
 const router = express.Router();
-const mongoose = require('mongoose');
 const registerController = require("../controller/registerController");
-const db = mongoose.connection;
-db.on('error',()=>console.log('error in connection'));
-db.once('open',()=>console.log('connected sucessfully sir'));
 
-router.post("/actionregister", async(req, res, next)=> {
-    registerController.register_user(req,res);
-    res.render("login");
-});
-// end of reg page with database //
+// redirect to login page with username 
+router.post("/actionregister", async function (req, res, next) {
+        registerController.register_user(req, res);
+        res.render("login", { user: req.body }); // create registerSuccess page and allow login on succesful registration 
+    });
 
-router.get("/", async(req,res, post) =>{
-    res.render("register");
-});
+router.get("/", async function (req, res, post) {
+        res.render("register");
+    });
 
 module.exports = router;
