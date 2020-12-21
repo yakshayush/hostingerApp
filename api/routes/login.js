@@ -2,12 +2,15 @@ const express = require("express");
 const router = express.Router();
 const loginController = require("../controller/loginController");
 const passport = require('passport');
+const { response } = require("express");
 
 router.post("/signInForm", async(req, res, next) => {
-    console.log('kkk');
-    loginController.create_a_task(req, res);
-    //  res.render("../../views/login");
-    next();
+try{
+    console.log('request', req.body);
+    loginController.create_a_task(req, res, next);
+}catch(error) {
+    next(error);
+}   
 });
 
 //login main page
@@ -24,14 +27,6 @@ router.post("/login", (req, res) => {
 });
 
 router.get("/google/callback",passport.authenticate('google'), (req, res) => {
-    //console.log('error:', error);
-    //console.log('response', response);
-    //console.log('body', body);
-    //console.log(response.statusCode);
-    // return done(null, body);
-    console.log('request --- ', req.user);
-    console.log('request --- ', res.user);
-
     res.render('success', {user: req.user});
 });
 

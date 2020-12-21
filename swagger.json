@@ -24,7 +24,7 @@
       "description": "login actions",
       "externalDocs": {
         "description": "Find out more",
-        "url": "http://swagger.io"
+        "url": "http://localhost:3000"
       }
     },
     {
@@ -32,7 +32,7 @@
       "description": "provide details of clinic",
       "externalDocs": {
         "description": "User Documents",
-        "url": "http://swagger.io"
+        "url": "http://localhost:3000"
       }
     },
     {
@@ -40,7 +40,15 @@
       "description": "provide details about doctor",
       "externalDocs": {
         "description": "User Documents",
-        "url": "http://swagger.io"
+        "url": "http://localhost:3000"
+      }
+    },
+    {
+      "name": "Reports",
+      "description": "provide Reports",
+      "externalDocs": {
+        "description": "User Documents",
+        "url": "http://localhost:3000"
       }
     }
   ],
@@ -66,10 +74,10 @@
             }
           }
         ],
-      "node_auth": [
-        "write",
-        "read"
-      ],
+        "node_auth": [
+          "write",
+          "read"
+        ],
         "responses": {
           "200": {
             "description": "successful operation",
@@ -316,6 +324,308 @@
             }
           },
           "401": {
+            "description": "Invalid status value",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/createDoctorProfile": {
+      "post": {
+        "tags": [
+          "doctor"
+        ],
+        "operationId": "createDoctor",
+        "summary": "create doctor profile",
+        "description": "create doctor profile",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "user object",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/Task"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/updateDoctorProfileById/{id}": {
+      "put": {
+        "tags": [
+          "doctor"
+        ],
+        "operationId": "updateDoctorProfile",
+        "summary": "update doctor profile",
+        "description": "update doctor profile",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "profile id that needs to be deleted",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/deleteDoctorProfileById/{id}": {
+      "delete": {
+        "tags": [
+          "doctor"
+        ],
+        "operationId": "deleteDoctor",
+        "summary": "delete doctor profile",
+        "description": "delete doctor profile",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "profile id that needs to be deleted",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/fetchDoctorById/{id}": {
+      "get": {
+        "tags": [
+          "doctor"
+        ],
+        "operationId": "fetchDoctor",
+        "summary": "fetch doctor profile",
+        "description": "fetch doctor profile",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "profile id that needs to be deleted",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/fetchDoctorBySpecilization/{specialization_id}": {
+      "get": {
+        "tags": [
+          "doctor"
+        ],
+        "operationId": "fetchDoctorBySpecialization",
+        "summary": "fetch doctor profile by specialization",
+        "description": "fetch doctor profile by specialization",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "specialization_id",
+            "in": "path",
+            "description": "profile id that needs to be deleted",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/fetchAppointmentsByDoctorId/{id}": {
+      "get": {
+        "tags": [
+          "doctor"
+        ],
+        "operationId": "fetchDoctorAppointments",
+        "summary": "fetch doctor appointments",
+        "description": "fetch doctor appointments",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "profile id that needs to be deleted",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/fetchDoctorsByLocation/{location}": {
+      "get": {
+        "tags": [
+          "doctor"
+        ],
+        "operationId": "fetchDoctorsByLocation",
+        "summary": "fetch doctor appointments",
+        "description": "fetch doctor appointments",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "description": "location of the area",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/todosResponse"
+              }
+            }
+          },
+          "400": {
             "description": "Invalid status value",
             "schema": {
               "$ref": "#/definitions/InvalidResponse"

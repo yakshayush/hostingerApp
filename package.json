@@ -4,9 +4,27 @@
   "description": "sumeet",
   "main": "app.js",
   "scripts": {
-    "test": "jest --config ./jest.config.json",
+    "test": "jest --config ./jest.config.json --reporters default jest-stare --testTimeout=10000 --detectOpenHandles --runInBand --forceExit --coverage",
     "dev": "nodemon app.js",
     "start": "node app.js"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "verbose": true,
+    "testSequencer": "testSequencer.js",
+    "coverageDirectory": "my_reports/",
+    "coverageReporters": [
+      "html",
+      "text"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    }
   },
   "repository": {
     "type": "git",
@@ -18,6 +36,9 @@
   "author": "sumeet",
   "license": "ISC",
   "dependencies": {
+    "@jest/test-sequencer": "^26.6.3",
+    "@shelf/jest-mongodb": "^1.2.3",
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "config": "^3.3.3",
     "bootstrap": "^5.0.0-beta1",
@@ -26,6 +47,8 @@
     "ejs": "^3.1.5",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
+    "jest": "^26.6.3",
+    "jest-stare": "^2.2.0",
     "js-yaml": "^3.14.1",
     "jsonwebtoken": "^8.5.1",
     "jquery": "^3.5.1",
@@ -33,6 +56,10 @@
     "nodemon": "^2.0.6",
     "passport": "^0.4.1",
     "passport-google-oauth": "^2.0.0",
+    "supertest": "^6.0.1",
+    "swagger-jsdoc": "^6.0.0-rc.3",
+    "swagger-ui-express": "^4.1.5",
+    "validator": "^13.5.1"
     "popper.js": "^1.16.1",
     "swagger-jsdoc": "^6.0.0-rc.3",
     "swagger-ui-express": "^4.1.5",
