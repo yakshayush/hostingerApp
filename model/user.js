@@ -68,7 +68,7 @@ userSchema.pre('save', async function(next) {
     } catch (error) {
         next(error)   
     }
-})
+});
 
 //create new collections //
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model("User", userSchema, "user");

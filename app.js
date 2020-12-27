@@ -19,8 +19,8 @@ app.use(session({
     saveUninitialized: true,
     secret: 'node' 
 }));
-const helmet = require("helmet");
-const rateLimiter = require("express-rate-limit");
+//const helmet = require("helmet");
+//const rateLimiter = require("express-rate-limit");
 
 const yaml = require('js-yaml');
 require('./utils/passport-setup');
@@ -28,13 +28,19 @@ const errorHandler = require('./utils/error-handler');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDoc = require('./swagger.json');
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
-require("./model/user");
+require('./model/user');
+require('./model/doctor');
+require('./model/appointment');
+require('./model/payment');
+require('./model/report');
+
 const dbConfig = config.get('mongoDb.host');
 mongoose.connect(dbConfig, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
-    useCreateIndex: true
+    useCreateIndex: true,
+    poolSize: 10
 });
 
 mongoose.connection.on("error", () => {
@@ -42,6 +48,7 @@ mongoose.connection.on("error", () => {
 }).once("open", () => {
     console.log("> connected database");
 });
+mongoose.set('debug', true);
 var NODE_ENV = config.util.getEnv('NODE_ENV');
 console.log('NODE_ENV: ' + NODE_ENV);
 var cookieParser = require('cookie-parser');
@@ -59,6 +66,8 @@ app.use(errorHandler);
 
 const loginRoute = require('./api/routes/login');
 const registerRoute = require('./api/routes/register');
+const doctorRoute = require('./api/routes/doctor');
+const userRoute = require('./api/routes/user');
 const passport = require('passport');
 app.use(passport.initialize());
 app.use(passport.session());
@@ -72,9 +81,11 @@ app.get("/", (req, res) => {
     res.render("home");
 });
 
-//html
+//route
 app.use('/login', loginRoute);
 app.use('/register', registerRoute);
+app.use('/user', userRoute);
+app.use('/doctor', doctorRoute);
 
 if (NODE_ENV !== 'test') {
     app.listen(PORT, () => console.log('server started'));

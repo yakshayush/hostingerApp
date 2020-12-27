@@ -1,6 +1,7 @@
 'use strict';
 
-const mongoose = require("mongoose");
+const mongoose = require("mongoose"),
+    Schema = mongoose.Schema;
 //const validator = require("validator");
 
 const appointmentSchema = new mongoose.Schema({
@@ -12,4 +13,4 @@ const appointmentSchema = new mongoose.Schema({
     patient_id: [{ type: Schema.Types.ObjectId, ref: 'User' }]
 });
 
-exports.module = mongoose.model("Appointment", appointmentSchema);
+exports.module = mongoose.model("Appointment", appointmentSchema, "appointment");

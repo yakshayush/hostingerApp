@@ -45,7 +45,7 @@ const doctorSchema = new mongoose.Schema({
     }, 
 
     phone: {
-        type: Integer
+        type: Number
     }, 
 
     authType: {
@@ -61,7 +61,7 @@ const doctorSchema = new mongoose.Schema({
     },
 
     consultationCharge: {
-        type: Integer
+        type: Number
     },
 
     clinicName: {
@@ -69,4 +69,4 @@ const doctorSchema = new mongoose.Schema({
     }
 });
 
-exports.module = mongoose.model("Doctor", doctorSchema);
+exports.module = mongoose.model("Doctor", doctorSchema, "doctor");
