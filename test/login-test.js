@@ -1,8 +1,9 @@
 const app = require('../app');
-const userModel = require('../model/user');
 const mongoose = require('mongoose');
+const userModel = mongoose.model('User');
 const supertest = require('supertest');
 let server;
+let userId;
 
 describe('My Test Suite', () => {
   beforeAll(async (done) => {
@@ -44,8 +45,23 @@ test('login returns 200', async (done) => {
       DOB: '12-01-1999',
       authType: 'registered'
     });
+    userId = response.body._id;
+    expect(response.body._id).toBeTruthy;
     expect(response.status).toBe(200);
     done();
   });
 });
+
+describe('Fetch User Suite', () => {
+  test('Fetch User returns 200', async (done) => {
+      console.log('userId', userId);
+      await supertest(server).get('/user/' + userId).then(response => {
+        expect(response.body).toBeTruthy;
+        expect(response.status).toBe(200);
+        const jsonResponse = JSON.parse(response.text);
+        expect(jsonResponse.user._id).toEqual(userId);
+      });
+      done();
+      });
+  });
 });
