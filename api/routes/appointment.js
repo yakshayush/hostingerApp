@@ -2,24 +2,40 @@ const express = require("express");
 const router = express.Router();
 const appointmentController = require("../controller/appointmentController");
 
-router.get('/createAppointment', async(req, res, next) => {
+router.post('/createAppointment', async(req, res, next) => {
     try {
-        const user = appointmentController.create_appointment(req, res, next);
-        res.json(user)
-        return;
+    return await appointmentController.create_appointment(req, res, next);
     } catch (error) {
         next(error);
     }
 });
 
-router.get('/deleteAppointment', async(req, res, next) => {
+router.delete('/deleteAppointment', async(req, res, next) => {
     try {
-        const user = appointmentController.delete_appointment(req, res, next);
-        res.json(user)
-        return;
+        return await appointmentController.delete_appointment(req, res, next);
     } catch (error) {
         next(error);
     }
+});
+
+router.get('/fetchAllAppointment', async(req, res, next) => {
+    try {
+        return await appointmentController.fetch_all_appointment(req, res, next);
+    } catch (error) {
+        next(error);
+    }
+});
+
+router.get('/fetchAppointmentById', async(req, res, next) => {
+    try {
+        return await appointmentController.fetch_appointment_byId(req, res, next);
+    } catch (error) {
+        next(error);
+    }
+});
+
+router.get('/', async(req, res, next) => {
+    res.render('book_appointment');
 });
 
 module.exports = router;

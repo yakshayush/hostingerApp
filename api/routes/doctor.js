@@ -38,4 +38,9 @@ router.delete("/removeDoctor", async function (req, res, next) {
     }
 });
 
+router.get("/", async function (req, res, next) {
+    res.render('doctor');
+});
+
+
 module.exports = router;

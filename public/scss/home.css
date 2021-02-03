@@ -1164,4 +1164,47 @@ a:hover {
   -webkit-transition-delay: .4s;
           transition-delay: .4s;
 }
+
+.doctor_header {
+  height: 50vh;
+  background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(../images/doc1.jpg);
+  opacity: 5;
+  padding: 50;
+  display: flex;
+  font-family: sans-serif;
+  align-self: start;
+  background-size: cover;
+  background-position: center;  
+}
+.search-slt{
+    display: block;
+    width: 25rem;
+    font-size: 16px;
+    color: #55595c;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    line-height: 2.5rem;
+    border-radius:0;
+}
+.wrn-btn{
+    width: 25rem;
+    font-size: 16px;
+    font-weight: 400;    
+    text-transform: capitalize;
+     border-radius:0;
+}
+.cards1{
+  justify-content:center;
+  font-size: 2rem;
+  display: block;
+  color: #fff;
+  padding:20;
+  
+  font-family: sans-serif;
+  
+}
+/*button css*/
+
+
 /*# sourceMappingURL=home.css.map */

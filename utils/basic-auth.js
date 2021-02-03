@@ -1,8 +1,8 @@
-module.exports = basicAuth;
+const config = require('config');
 
 async function basicAuth(req, res, next) {
     // make authenticate path public
-    if (req.path === '/users/authenticate') {
+    if (req.path === '/api/authenticate') {
         return next();
     }
 
@@ -18,13 +18,11 @@ async function basicAuth(req, res, next) {
     const credentials = Buffer.from(base64Credentials, 'base64').toString('ascii');
     const [username, password] = credentials.split(':');
 
- //   const user = await userService.authenticate({ username, password });
- //   if (!user) {
- //       return res.status(401).json({ message: 'Invalid Authentication Credentials' });
- //   }
-
-    // attach user to request object
-//    req.user = user
+    if (!(username === config.username && password === config.password)) {
+        return res.status(401).json({ message: 'Invalid Authentication Credentials' });        
+    }
 
     next();
 }
+
+module.exports = basicAuth;
