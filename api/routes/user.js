@@ -12,8 +12,7 @@ router.get('/:userId', async(req, res, next) => {
 
 router.delete('/:userId', async(req, res, next) => {
     try {
-        await userController.deleteUserById(req.params.userId);
-        return;
+        return await userController.deleteUserById(req.params.userId);
     } catch (error) {
         next(error);
     }
@@ -21,8 +20,7 @@ router.delete('/:userId', async(req, res, next) => {
 
 router.put('/:userId', async(req, res, next) => {
     try {
-        userController.updateUserById(req.params.userId);
-        return;
+    return await userController.updateUserById(req.params.userId);
     } catch (error) {
         next(error);
     }

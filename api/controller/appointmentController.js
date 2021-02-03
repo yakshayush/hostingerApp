@@ -3,26 +3,43 @@
 var mongoose = require('mongoose'),
     appointment = mongoose.model('Appointment');
 
-exports.create_a_task = function(req, res, next) {
+exports.create_appointment = async function(req, res, next) {
     var new_appointment = new appointment(req.body);
-    console.log('new_appointment ---' ,new_appointment)
-    new_appointment.save()
-    .then(function(response){
-        res.json(response);
-        return;
+    await new_appointment.save()
+    .then(response => {
+        return res.json(response);
     })
-    .catch(function(reason){
+    .catch(reason => {
         next(reason);
     });
 };
 
-exports.delete_appointment = function(req, res, next) {
-    appointment.findByIdAndDelete(req.param.id)
-    .then(function(response){
-        res.json(response);
-        return;
+exports.delete_appointment = async function(req, res, next) {
+    await appointment.findByIdAndDelete(mongoose.Types.ObjectId(req.param.id))
+    .then(response => {
+        return res.json(response);
     })
-    .catch(function(reason){
+    .catch(reason => {
+        next(reason);
+    });
+};
+
+exports.fetch_all_appointment = async function(req, res, next) {
+    await appointment.find()
+    .then(response => {
+        return res.json(response);
+    })
+    .catch(reason => {
+        next(reason);
+    });
+};
+
+exports.fetch_appointment_byId = async function(req, res, next) {
+    await appointment.findById(mongoose.Types.ObjectId(req.param.id))
+    .then(response => {
+        return res.json(response);
+    })
+    .catch(reason => {
         next(reason);
     });
 };

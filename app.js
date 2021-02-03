@@ -68,6 +68,8 @@ const loginRoute = require('./api/routes/login');
 const registerRoute = require('./api/routes/register');
 const doctorRoute = require('./api/routes/doctor');
 const userRoute = require('./api/routes/user');
+const appointmentRoute = require('./api/routes/appointment');
+
 const passport = require('passport');
 app.use(passport.initialize());
 app.use(passport.session());
@@ -86,6 +88,7 @@ app.use('/login', loginRoute);
 app.use('/register', registerRoute);
 app.use('/user', userRoute);
 app.use('/doctor', doctorRoute);
+app.use('/appointment', appointmentRoute);
 
 if (NODE_ENV !== 'test') {
     app.listen(PORT, () => console.log('server started'));

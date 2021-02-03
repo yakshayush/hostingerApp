@@ -34,13 +34,10 @@ exports.findUserById = async function(req, res, next) {
         res.status(400).json('userId is not valid');
         return;
     }
-    const answer = await userModel.findById(mongoose.Types.ObjectId(req.params.userId))
+    await userModel.findById(mongoose.Types.ObjectId(req.params.userId))
     .then(user => {
-        console.log(user);
-        res.header('Content-Type', 'application/json');
         return res.status(200).send(JSON.stringify({user: user}));
     }).catch(err => {
-        console.log(err);
         return res.status(500).send({
             message: err.message
         });

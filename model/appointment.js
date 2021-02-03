@@ -7,10 +7,12 @@ const mongoose = require("mongoose"),
 const appointmentSchema = new mongoose.Schema({
     appointmentTime: {
         type: Date,
-        required: true
+        required: true,
+        unique: true
     },
     doctor_id: [{ type: Schema.Types.ObjectId, ref: 'Doctor' }],
     patient_id: [{ type: Schema.Types.ObjectId, ref: 'User' }]
 });
 
-exports.module = mongoose.model("Appointment", appointmentSchema, "appointment");
+//add validation on id's existence
+module.exports = mongoose.model("Appointment", appointmentSchema, "appointment");
