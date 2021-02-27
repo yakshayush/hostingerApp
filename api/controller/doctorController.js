@@ -1,16 +1,18 @@
 'use strict';
 
-var mongoose = require('mongoose'),
-doctorSchmema = mongoose.model('Doctor');
+var mongoose = require('mongoose');
+var doctorSchmema = mongoose.model('Doctor');
 
 exports.register_doctor = function(req, res, next) {
+    console.log(req.body);
     var doctor_data = new doctorSchmema(req.body);
     doctor_data.save()
-    .then(function(task) {
-        res.json(task.body);
+    .then(function(response){
+        res.json(response);
         return;
-    }).catch(function(error){
-        next(error)
+    })
+    .catch(function(reason){
+        next(reason);
     });
 };
 

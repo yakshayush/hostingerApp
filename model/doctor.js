@@ -69,4 +69,4 @@ const doctorSchema = new mongoose.Schema({
     }
 });
 
-exports.module = mongoose.model("Doctor", doctorSchema, "doctor");
+module.exports = mongoose.model("Doctor", doctorSchema, "doctor");
