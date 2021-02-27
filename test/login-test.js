@@ -2,29 +2,31 @@ const app = require('../app');
 const mongoose = require('mongoose');
 const userModel = mongoose.model('User');
 const supertest = require('supertest');
+const dbHandler = require('./db-handler');
 let server;
 let userId;
 
-describe('My Test Suite', () => {
-  beforeAll(async (done) => {
-    console.log('beforeAll... ');
-    server = app.listen(4000, () => {
+beforeAll(async () => {
+  process.env.NODE_ENV = 'test';
+  await dbHandler.connect();
+  server = app.listen(3003, () => {
       global.agent = supertest.agent(app);
-    });
-    console.log(mongoose.connection.readyState);
-    userModel.deleteMany({}, (err) => {
-      console.log(err);
-    });
-    done();
   });
+  console.log(mongoose.connection.readyState);
+});
 
-  afterAll(async (done) => {
-    console.log('afterAll... ');  
-    server.close();
-    done();
-  });
+/**
+* Remove and close the db and server.
+*/
+afterAll(async () => {
+  await dbHandler.clearDatabase();
+  await dbHandler.closeDatabase();
+  await server.close();
+});
 
-  describe('Test Failure Suite', () => {
+describe('Login Test Suite', () => {
+
+  describe('Test login Failure Suite', () => {
       test('login returns 500', async (done) => {
         const response = await supertest(server).post('/login/signInForm').send({
         });
@@ -33,7 +35,7 @@ describe('My Test Suite', () => {
   });
 });
 
-describe('Test Pass Suite', () => {
+describe('Test login Pass', () => {
 test('login returns 200', async (done) => {
     const response = await supertest(server).post('/login/signInForm').type('json').send({
       name: 'ooopp',

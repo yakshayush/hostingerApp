@@ -34,20 +34,6 @@ require('./model/appointment');
 require('./model/payment');
 require('./model/report');
 
-const dbConfig = config.get('mongoDb.host');
-mongoose.connect(dbConfig, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false,
-    useCreateIndex: true,
-    poolSize: 10
-});
-
-mongoose.connection.on("error", () => {
-    console.log("> error occurred from the database");
-}).once("open", () => {
-    console.log("> connected database");
-});
 mongoose.set('debug', true);
 var NODE_ENV = config.util.getEnv('NODE_ENV');
 console.log('NODE_ENV: ' + NODE_ENV);
@@ -91,6 +77,20 @@ app.use('/doctor', doctorRoute);
 app.use('/appointment', appointmentRoute);
 
 if (NODE_ENV !== 'test') {
-    app.listen(PORT, () => console.log('server started'));
+    const dbConfig = config.get('mongoDb.host');
+    mongoose.connect(dbConfig, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useFindAndModify: false,
+        useCreateIndex: true,
+        poolSize: 10
+    });
+
+    mongoose.connection.on("error", () => {
+        console.log("> error occurred from the database");
+    }).once("open", () => {
+        console.log("> connected database");
+    });
+    app.listen(PORT, () => console.log('server started on port ${port}'));
 }
 module.exports = app;
