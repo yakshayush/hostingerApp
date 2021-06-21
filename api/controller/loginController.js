@@ -1,17 +1,21 @@
 'use strict';
 
 var mongoose = require('mongoose');
-var Task = mongoose.model('User');
+var userModel = mongoose.model('User');
+const bcrypt = require('bcrypt');
 
-exports.create_a_task = function(req, res, next) {
-    var new_task = new Task(req.body);
-    console.log('new_+tak ---' ,new_task)
-    new_task.save()
-    .then(function(response){
-        res.json(response);
-        return;
+exports.create_a_task = async function(req, res, next) {
+    console.log(req.body);
+    await userModel.findOne({email: req.body.email })
+    .then((user) => {
+        ( async() => {
+            var result = await bcrypt.compare(req.body.password, user.password);
+            console.log(result);
+            if (result === true) {
+                res.redirect('/');
+            }
     })
-    .catch(function(reason){
-        next(reason);
-    });
+}).catch((err) => {
+        throw err;
+});
 };

@@ -5,7 +5,7 @@ const passport = require('passport');
 
 router.post("/signInForm", async(req, res, next) => {
 try{
-    loginController.create_a_task(req, res, next);
+    await loginController.create_a_task(req, res, next);
 }catch(error) {
     next(error);
 }   
