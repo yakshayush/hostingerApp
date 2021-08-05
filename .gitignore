@@ -23,7 +23,10 @@
 hs_err_pid*
 build
 npm-debug.log
-package-lock.json
 coverage
 jest-stare
-**node_modules
+target
+
+#dependecies
+*/node_modules/*
+/node_modules
