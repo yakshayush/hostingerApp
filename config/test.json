@@ -1,0 +1,6 @@
+{
+    "mongoDb": {
+        "host": "mongodb+srv://mongodb:mongodb@cluster0.bvlwn.mongodb.net/mongodb?retryWrites=true&w=majority"
+    },
+    "port": 3003
+}

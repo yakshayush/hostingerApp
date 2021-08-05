@@ -2,7 +2,7 @@
 
 <div class="container mt-5">
        <h1>Register Account</h1>
-    <form action="/register" method="POST"> 
+    <form action="/register/actionregister" method="POST"> 
         
         <div class="form-group">
             <label for="exampleInputName">Name</label>
@@ -15,7 +15,7 @@
         </div>
 
         <div class="dropdown">
-            <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="Profile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Profile
             </a>          
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -36,6 +36,11 @@
             <label for="exampleInputPassword1">Password</label>
             <input type="password" placeholder="Password"   name="password" class="form-control" id="exampleInputPassword1">
         </div>
+
+        <div class="form-group">
+          <label for="exampleInputPassword2">Confirm-Password</label>
+          <input type="password" placeholder="Confirm-Password"   name="confirmpassword" class="form-control" id="exampleInputPassword2">
+      </div>
 
 
 

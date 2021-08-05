@@ -1,0 +1,9 @@
+{
+    "mongoDb": {
+        "host": "mongodb+srv://mongodb:mongodb@cluster0.bvlwn.mongodb.net/mongodb?retryWrites=true&w=majority"
+    },
+    "port": 3000,
+    "TOKEN_SECRET": "sE6ret0gfknf",
+    "username": "username",
+    "password": "password"
+}
